@@ -11,7 +11,7 @@ ClimbReset::ClimbReset(ClimbSubsystem* subsystem)
 }
 
 void ClimbReset::Initialize(){
-
+  
 }
 
 void ClimbReset::Execute(){
