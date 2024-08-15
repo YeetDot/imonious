@@ -17,5 +17,5 @@ class ClimbReset
   bool IsFinished() override;
   void End(bool interrupted) override;
  private:
-  ClimbSubsystem* m_subsystem;
+  ClimbSubsystem* climb;
 };

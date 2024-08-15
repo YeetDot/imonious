@@ -11,10 +11,12 @@ class ClimbSubsystem : public frc2::SubsystemBase {
    void Periodic() override;
    void SimulationPeriodic() override;
    bool atLimit();
-   void startMotor();
+   void startMotor(double speed);
    void stopMotor();
+   void resetEncoder();
+   bool isZeroed;
    private:
    rev::CANSparkMax motor{41, rev::CANSparkLowLevel::MotorType::kBrushless};
-   rev::SparkLimitSwitch limit = motor.GetForwardLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
+   rev::SparkLimitSwitch limit = motor.GetForwardLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyClosed);
    rev::SparkRelativeEncoder encoder = motor.GetEncoder();
 };

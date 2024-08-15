@@ -5,13 +5,13 @@
 #include "commands/ClimbReset.h"
 
 ClimbReset::ClimbReset(ClimbSubsystem* subsystem)
-    : m_subsystem{subsystem} {
+    : climb{subsystem} {
   // Register that this command requires the subsystem.
-  AddRequirements(m_subsystem);
+  AddRequirements(climb);
 }
 
 void ClimbReset::Initialize(){
-  
+  climb->startMotor(0.1);
 }
 
 void ClimbReset::Execute(){
@@ -19,10 +19,15 @@ void ClimbReset::Execute(){
 }
 
 bool ClimbReset::IsFinished(){
-  
+  if(climb->atLimit()){
+    climb->resetEncoder();
+    climb->stopMotor();
+    return true;
+  }
+  return false;
 }
 
 void ClimbReset::End(bool interrupted){
-  
+  climb->isZeroed = true;
 }
 

@@ -8,6 +8,7 @@
 
 ClimbSubsystem::ClimbSubsystem() {
   motor.SetSmartCurrentLimit(40);
+  isZeroed = false;
 }
 
 void ClimbSubsystem::Periodic() {
@@ -22,10 +23,14 @@ bool ClimbSubsystem::atLimit() {
   return !limit.Get();
 }
 
-void ClimbSubsystem::startMotor() {
-  motor.Set(0.05);
+void ClimbSubsystem::startMotor(double speed) {
+  motor.Set(speed);
 }
 
 void ClimbSubsystem::stopMotor() {
   motor.Set(0);
+}
+
+void ClimbSubsystem::resetEncoder(){
+  encoder.SetPosition(0);
 }
