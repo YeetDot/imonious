@@ -34,9 +34,6 @@ void RobotContainer::ConfigureBindings() {
   // Configure your trigger bindings here
 
   // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-  frc2::Trigger([this] {
-    return m_subsystem.ExampleCondition();
-  }).OnTrue(ExampleCommand(&m_subsystem).ToPtr());
 
   frc2::Trigger([this] {
     return climb.isZeroed;
@@ -52,7 +49,7 @@ void RobotContainer::ConfigureBindings() {
   m_driverController.LeftTrigger().WhileTrue(intake.Run([this] {
     if (indexer.IsGamePieceIndexed() || intake.OverrideBeambreakPressed){
       intake.开始输入(0.8);
-      indexer.开始马达(-0.5);
+      indexer.开始马达(0.5);
     } else {
       intake.停住输入();
       indexer.开始马达(0);
@@ -83,6 +80,5 @@ void RobotContainer::ConfigureBindings() {
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  // An example command will be run in autonomous
-  return autos::ExampleAuto(&m_subsystem);
+  return autos::ExampleAuto(&drive);
 }

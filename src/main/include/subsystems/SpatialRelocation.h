@@ -11,6 +11,7 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/kinematics/SwerveDriveOdometry.h>
+#include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/button/CommandXboxController.h>
 
@@ -102,6 +103,8 @@ class DriveSubsystem : public frc2::SubsystemBase {
       frc::Translation2d{-DriveConstants::kWheelBase / 2,
                          -DriveConstants::kTrackWidth / 2}};
 
+ double GetPoseX();
+ double GetPoseY();
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

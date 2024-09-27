@@ -21,3 +21,7 @@ void VoraciousConsumptionStage2::SimulationPeriodic() {
 void VoraciousConsumptionStage2::开始马达(double power){
    indexer.Set(power);
 }
+
+void VoraciousConsumptionStage2::StopMotor() {
+   indexer.Set(0);
+}

@@ -11,6 +11,10 @@ class VoraciousConsumptionStage2 : public frc2::SubsystemBase {
    void Periodic() override;
    void SimulationPeriodic() override;
    void 开始马达(double power);
+   void StopMotor();
+   /* 
+   * If game piece is not indexed, returns true
+   */
    bool IsGamePieceIndexed();
    private:
    rev::CANSparkMax indexer{21, rev::CANSparkLowLevel::MotorType::kBrushless};

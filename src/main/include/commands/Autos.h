@@ -6,11 +6,15 @@
 
 #include <frc2/command/CommandPtr.h>
 
-#include "subsystems/ExampleSubsystem.h"
+#include "subsystems/SpatialRelocation.h"
+#include "subsystems/VoraciousConsumption.h"
+#include "subsystems/VoraciousConsumptionStage2.h"
 
 namespace autos {
 /**
  * Example static factory for an autonomous command.
  */
-frc2::CommandPtr ExampleAuto(ExampleSubsystem* subsystem);
+frc2::CommandPtr ExampleAuto(DriveSubsystem* drive);
+frc2::CommandPtr ALittleButNotSuperDuperVeryAdvancedAutonomousCommandForMeetingTheRequirementImposedByCamden(DriveSubsystem* drive);
+frc2::CommandPtr PickUpASingleNoteAuto(DriveSubsystem* drive, VoraciousConsumption* intake, VoraciousConsumptionStage2* indexer);
 }  // namespace autos

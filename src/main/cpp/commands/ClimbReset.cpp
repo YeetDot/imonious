@@ -11,7 +11,7 @@ ClimbReset::ClimbReset(ClimbSubsystem* subsystem)
 }
 
 void ClimbReset::Initialize(){
-  climb->startMotor(0.1);
+  climb->startMotor(0.05);
 }
 
 void ClimbReset::Execute(){
