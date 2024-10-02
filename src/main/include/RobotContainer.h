@@ -9,8 +9,10 @@
 #include <frc2/command/RunCommand.h>
 #include <frc/MathUtil.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 #include "Constants.h"
+#include "commands/Autos.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/ClimbSubsystem.h"
 #include "subsystems/VoraciousConsumption.h"
@@ -30,7 +32,7 @@ class RobotContainer {
  public:
   RobotContainer();
 
-  frc2::CommandPtr GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -45,6 +47,14 @@ class RobotContainer {
   ClimbSubsystem climb;
   DriveSubsystem drive;
   AddressableLED leds{&indexer};
+
+  // The autonomous routines
+  frc2::CommandPtr m_simpleAuto = autos::ExampleAuto(&drive);
+  frc2::CommandPtr m_requirementAuto = autos::ALittleButNotSuperDuperVeryAdvancedAutonomousCommandForMeetingTheRequirementImposedByCamden(&drive);
+  frc2::CommandPtr m_complexAuto = autos::PickUpASingleNoteAuto(&drive, &intake, &indexer);
+
+  // The chooser for the autonomous routines
+  frc::SendableChooser<frc2::Command*> m_chooser;
 
   void ConfigureBindings();
 };

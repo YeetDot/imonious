@@ -9,6 +9,7 @@ class Regurgitation : public frc2::SubsystemBase {
    public:
    Regurgitation();
    void Shoot(double rpm);
+   void StopShoot();
    void Periodic() override;
    void SimulationPeriodic() override;
    private:

@@ -39,3 +39,22 @@ void Pivot::换角度(double 电量) {
   motor.Set(电量);
 }
 
+void Pivot::SpeakerSetpoint() {
+  this->SetPivotAngle(75);
+}
+
+void Pivot::PodiumSetpoint() {
+  this->SetPivotAngle(60);
+}
+
+void Pivot::AmpSetpoint() {
+  this->SetPivotAngle(80);
+}
+
+void Pivot::RememberAngle() {
+  this->AngleMemory = this->GetPivotAngle();
+}
+
+double Pivot::ConjureAngle() {
+  return AngleMemory;
+}

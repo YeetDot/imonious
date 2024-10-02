@@ -9,8 +9,6 @@
 #include "commands/ExampleCommand.h"
 
 frc2::CommandPtr autos::ExampleAuto(DriveSubsystem* drive) {
-  
-
   return frc2::FunctionalCommand(
       [drive] {drive->ResetEncoders(); },
       [drive] {drive->Drive(1_mps, 0_mps, 0_rad_per_s, true, true);},

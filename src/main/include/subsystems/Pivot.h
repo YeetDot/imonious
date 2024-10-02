@@ -14,8 +14,15 @@ class Pivot : public frc2::SubsystemBase {
    void SimulationPeriodic() override;
    void 换角度(double 电量);
    void SetPivotAngle(double angle);
+   void RememberAngle();
+   double ConjureAngle();
    double GetPivotAngle();
+   void SpeakerSetpoint();
+   void PodiumSetpoint();
+   void AmpSetpoint();
    private:
+   double AngleMemory{45};
+
    
    rev::CANSparkMax motor{31, rev::CANSparkLowLevel::MotorType::kBrushless};
    rev::SparkAbsoluteEncoder PivotAngle = motor.GetAbsoluteEncoder(rev::SparkAbsoluteEncoder::Type::kDutyCycle);

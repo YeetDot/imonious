@@ -5,6 +5,7 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/button/Trigger.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 #include "commands/Autos.h"
 #include "commands/ExampleCommand.h"
@@ -41,7 +42,8 @@ void RobotContainer::ConfigureBindings() {
 
   // Schedule `ExampleMethodCommand` when the Xbox controller's B button is
   // pressed, cancelling on release.
-  m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
+  m_driverController.B().WhileTrue(pivot.RunOnce([this] {pivot.RememberAngle(); pivot.SpeakerSetpoint();}));
+  m_driverController.B().OnFalse(intake.RunOnce([this] {pivot.SetPivotAngle(pivot.ConjureAngle());}));
 
   m_driverController.A().WhileTrue(intake.RunOnce([this] {intake.OverrideBeambreakPressed = true;}));
   m_driverController.A().OnFalse(intake.RunOnce([this] {intake.OverrideBeambreakPressed = false;}));
@@ -58,8 +60,8 @@ void RobotContainer::ConfigureBindings() {
   }));
   m_driverController.LeftTrigger().OnFalse(intake.RunOnce([this] {intake.停住输入();indexer.开始马达(0);}));
 
-  m_driverController.RightTrigger().OnTrue(intake.RunOnce([this] {intake.开始输入(-0.5);}));
-  m_driverController.RightTrigger().OnFalse(intake.RunOnce([this] {intake.停住输入();}));
+  m_driverController.RightTrigger().OnTrue(intake.RunOnce([this] {intake.开始输入(-0.5); indexer.开始马达(-0.5);}));
+  m_driverController.RightTrigger().OnFalse(intake.RunOnce([this] {intake.停住输入(); indexer.StopMotor();}));
 
   m_driverController.LeftBumper().WhileTrue(pivot.Run([this] {
     pivot.SetPivotAngle(75);
@@ -79,6 +81,12 @@ void RobotContainer::ConfigureBindings() {
   // }));
 }
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  return autos::ExampleAuto(&drive);
+frc2::Command* RobotContainer::GetAutonomousCommand() {
+  m_chooser.SetDefaultOption("Example", m_simpleAuto.get());
+  m_chooser.AddOption("Required", m_requirementAuto.get());
+  m_chooser.AddOption("Complex", m_complexAuto.get());
+  frc::SmartDashboard::PutData(&m_chooser);
+
+
+  return m_chooser.GetSelected();
 }

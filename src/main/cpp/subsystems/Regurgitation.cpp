@@ -8,8 +8,12 @@ Regurgitation::Regurgitation() {
 }
 
 void Regurgitation::Shoot(double rpm) {
-  shooterPID.SetReference(rpm, rev::CANSparkBase::ControlType::kSmartVelocity);
-  kickerPID.SetReference(rpm, rev::CANSparkBase::ControlType::kSmartVelocity);
+  shooterPID.SetReference(rpm, rev::CANSparkBase::ControlType::kVelocity);
+  kickerPID.SetReference(rpm, rev::CANSparkBase::ControlType::kVelocity);
+}
+
+void Regurgitation::StopShoot() {
+  this->Shoot(0);
 }
 
 void Regurgitation::Periodic() {
